@@ -10,6 +10,7 @@ public class QueueConfig {
 
     public static final String FIRST_QUEUE_BASIC = "FIRST-QUEUE-BASIC";
     public static final String SECOND_QUEUE_BASIC = "SECOND-QUEUE-BASIC";
+    public static final String JSON_QUEUE_BASIC = "JSON-QUEUE-BASIC";
 
     @Bean
     public Queue firstQueue() {
@@ -22,6 +23,13 @@ public class QueueConfig {
     public Queue secondQueue() {
         return QueueBuilder
                 .durable(SECOND_QUEUE_BASIC)
+                .build();
+    }
+
+    @Bean
+    public Queue jsonQueue() {
+        return QueueBuilder
+                .durable(JSON_QUEUE_BASIC)
                 .build();
     }
 }

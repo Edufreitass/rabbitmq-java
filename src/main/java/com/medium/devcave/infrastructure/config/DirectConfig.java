@@ -10,13 +10,16 @@ public class DirectConfig {
     public static final String DIRECT_EXCHANGE_BASIC = "DIRECT-EXCHANGE-BASIC";
     public static final String TO_FIRST_QUEUE = "TO-FIRST-QUEUE";
     public static final String TO_SECOND_QUEUE = "TO-SECOND-QUEUE";
+    public static final String TO_JSON_QUEUE = "TO-JSON-QUEUE";
 
     private final Queue firstQueue;
     private final Queue secondQueue;
+    private final Queue jsonQueue;
 
-    public DirectConfig(Queue firstQueue, Queue secondQueue) {
+    public DirectConfig(Queue firstQueue, Queue secondQueue, Queue jsonQueue) {
         this.firstQueue = firstQueue;
         this.secondQueue = secondQueue;
+        this.jsonQueue = jsonQueue;
     }
 
     @Bean
@@ -42,6 +45,15 @@ public class DirectConfig {
                 .bind(secondQueue)
                 .to(directExchange())
                 .with(TO_SECOND_QUEUE)
+                .noargs();
+    }
+
+    @Bean
+    public Binding jsonDirectBinding() {
+        return BindingBuilder
+                .bind(jsonQueue)
+                .to(directExchange())
+                .with(TO_JSON_QUEUE)
                 .noargs();
     }
 
